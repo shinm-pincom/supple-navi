@@ -1,0 +1,12 @@
+{
+  "name": "supple-navi",
+  "version": "1.0.0",
+  "description": "サプリ×食品×お薬の避けた方がいい組み合わせを◎○△×で判定するブラウザ版ツール",
+  "private": true,
+  "scripts": {
+    "verify": "node verify.js && node verify-ui.js && node verify-render.js"
+  },
+  "devDependencies": {
+    "jsdom": "^26.0.0"
+  }
+}

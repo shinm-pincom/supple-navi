@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サプリ飲み合わせナビ｜避けた方がいい組み合わせが一目でわかる</title>
+<meta name="description" content="サプリ×サプリ、サプリ×食品の避けた方がいい組み合わせを◎○△×で判定。悩みから必要な成分と目安量も探せます。登録不要・無料。">
+<meta name="theme-color" content="#1f6feb">
+<meta name="robots" content="index,follow">
+<!-- SNSで共有されたときのカード表示 -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="サプリ飲み合わせナビ｜避けた方がいい組み合わせが一目でわかる">
+<meta property="og:description" content="サプリ×サプリ、サプリ×食品、お薬との避けた方がいい組み合わせを◎○△×で判定。悩み45件から成分と目安量も探せます。登録不要・無料。">
+<meta property="og:site_name" content="サプリ飲み合わせナビ">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<!-- favicon は外部ファイルを持たずデータURIで埋め込む（404を出さないため） -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%8A%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="hd">
+  <div class="hd-in">
+    <div class="logo">
+      <div class="logo-i">💊</div>
+      <div>
+        サプリ飲み合わせナビ
+        <span class="logo-sub">避けた方がいい組み合わせが一目でわかる</span>
+      </div>
+    </div>
+    <div class="hd-spacer"></div>
+    <button class="btn-2" onclick="window.print()">🖨 印刷・PDF保存</button>
+  </div>
+  <nav class="tabs">
+    <button class="tab on" data-pane="check">🔍 飲み合わせを調べる</button>
+    <button class="tab" data-pane="goal">🎯 悩みから探す</button>
+    <button class="tab" data-pane="dose">📋 成分と目安量</button>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <div class="disc">
+    <b>⚠️ はじめにお読みください</b>
+    このツールは公開されている一般情報をもとに「避けた方がいい組み合わせ」を示すものです。
+    <strong>特定のサプリをおすすめするものではなく、診断・治療の代わりにもなりません。</strong>
+    お薬を服用中の方、妊娠中・授乳中の方、持病のある方は、<strong>必ず医師・薬剤師に最終確認してください。</strong>
+    ここで「○」と出た組み合わせも、体質や量によっては合わないことがあります。
+  </div>
+
+  <!-- ============ 飲み合わせチェック ============ -->
+  <section class="pane on" id="pane-check">
+
+    <div class="card">
+      <h2 class="card-t"><span class="step">1</span>飲んでいるもの・食べるものを選ぶ（2つ以上）</h2>
+
+      <div class="sel" id="sel"></div>
+
+      <div class="srch">
+        <span class="srch-i">🔍</span>
+        <input type="text" id="q" placeholder="成分名・食品名で検索（例: 鉄、納豆、ワーファリン、グレープフルーツ）">
+      </div>
+
+      <div class="chips" id="kinds">
+        <button class="chip on" data-kind="all">すべて</button>
+        <button class="chip" data-kind="supp">サプリ成分</button>
+        <button class="chip" data-kind="food">食品・飲料</button>
+        <button class="chip" data-kind="drug">お薬（系統）</button>
+      </div>
+
+      <div class="grid" id="grid"></div>
+      <p class="hint">💡 お薬は「系統」で選べます。商品名がわからない場合は薬の説明書やお薬手帳をご確認ください。</p>
+    </div>
+
+    <div id="out"></div>
+  </section>
+
+  <!-- ============ 悩みから探す ============ -->
+  <section class="pane" id="pane-goal">
+    <div id="goal-view"></div>
+  </section>
+
+  <!-- ============ 成分と目安量 ============ -->
+  <section class="pane" id="pane-dose">
+    <div class="card">
+      <h2 class="card-t">
+        <span class="step">📋</span>成分ごとの目安量・上限量・飲むタイミング
+        <span class="sex-sw" id="sexsw">
+          <button class="on" data-sex="m">成人男性</button>
+          <button data-sex="f">成人女性</button>
+        </span>
+      </h2>
+      <div class="srch">
+        <span class="srch-i">🔍</span>
+        <input type="text" id="q2" placeholder="成分名で検索">
+      </div>
+      <div class="chips" id="cats2"></div>
+      <div id="dose-out"></div>
+    </div>
+  </section>
+
+  <div class="disc-f">
+    <strong>免責事項</strong><br>
+    本サイトの情報は、日本人の食事摂取基準（2020年版）、消費者庁の機能性表示食品の届出情報、内閣府食品安全委員会・EFSA・FDAの公表資料、および査読論文で報告されている内容をもとに、一般的な注意点として整理したものです。<br>
+    ・個々の体質・病状・服用中の薬の量によって、実際の影響は大きく異なります。<br>
+    ・「◎」「○」の表示は安全を保証するものではありません。<br>
+    ・本サイトは特定の商品・ブランド・メーカーを推奨するものではありません。特定商品の広告・販売を目的としていません。<br>
+    ・記載された成分について、疾病の治療・予防の効果を保証するものではありません。<br>
+    ・処方薬を服用中の方は、サプリメントの開始・中止の前に必ず主治医または薬剤師にご相談ください。<br>
+    ・本サイトの利用により生じたいかなる結果についても、運営者は責任を負いません。<br>
+    ・入力した内容はお使いの端末の中だけで処理され、外部に送信・保存されません。
+  </div>
+
+</main>
+
+<script src="js/data-items.js"></script>
+<script src="js/data-rules.js"></script>
+<script src="js/data-goals.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
