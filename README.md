@@ -3,9 +3,13 @@
 サプリ×サプリ、サプリ×食品、サプリ×お薬の「避けた方がいい組み合わせ」を **◎○△×** で判定するツール。
 おすすめはせず、避けるべき組み合わせと目安量だけを示す設計。
 
+## 公開URL
+
+<https://shinm-pincom.github.io/supple-navi/>
+
 ## 起動
 
-`index.html` をダブルクリックするだけ。サーバー不要・ビルド不要・通信なし。
+公開URLを開くか、`index.html` をダブルクリックするだけ。サーバー不要・ビルド不要・通信なし。
 
 ## 3つのタブ
 
@@ -101,18 +105,30 @@ npm run verify   # 3本まとめて実行
 3. **短文主義** — 判定は記号1文字＋一行、対処は「どうする:」の1行のみ。長い解説は置かない。
 4. **サプリより先に効くことを併記** — 各悩みに `lifestyle` を持たせ、サプリが最善手でない場合はそう書く（例: 男性型脱毛はフィナステリドが最もエビデンスが強い）。
 
-## 公開手順（GitHub Pages）
+## 公開状況（GitHub Pages・完了済み）
+
+| 項目 | 内容 |
+| --- | --- |
+| 公開URL | <https://shinm-pincom.github.io/supple-navi/> |
+| リポジトリ | <https://github.com/shinm-pincom/supple-navi>（public） |
+| 公開日 | 2026/08/13 |
+| 料金 | 無料（公開リポジトリの GitHub Pages） |
+| HTTPS | 強制有効 |
+
+### 修正を反映する手順
+
+ファイルを直したら、WSL側の git で push すれば1〜2分で公開版に反映される。
 
 ```bash
-git init
-git add .
-git commit -m "サプリ飲み合わせナビ 初版"
-git branch -M main
-git remote add origin https://github.com/<ユーザー名>/supple-navi.git
-git push -u origin main
+cd "/mnt/c/Users/maeshint/Documents/新規参入/app_dev/SuppleNavi"
+npm run verify          # 3本すべて ✅ を確認してから
+git add -A
+git commit -m "変更内容"
+git push
 ```
 
-リポジトリの Settings → Pages → Source を `main` / `root` に設定。
+Windows側に git は入っていないため、`wsl -e bash -lc '...'` 経由で実行する。
+認証は `gh auth login` 済み（アカウント: shinm-pincom）。
 `node_modules/` は `.gitignore` 済み。`verify*.js` と `README.md` は公開しても支障ない。
 
 ## 今後の拡張候補
