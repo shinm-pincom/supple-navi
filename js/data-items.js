@@ -685,3 +685,65 @@ const ITEMS = [
  tags:['cyp3a4_substrate','narrow_ti','immunosuppress','rx'], doseM:'—', doseF:'—', ul:'—', basis:'—', timing:'—',
  note:'血中濃度の管理が命に関わる薬。サプリの自己判断併用は行わず、必ず主治医に全て申告する。'},
 ];
+
+/* =========================================================
+   ここから下は「押すだけで選べる」ようにするための表示用データ。
+   判定ロジックには一切影響しない（ボタンの並び順と表示名だけを決める）
+   ========================================================= */
+
+/* --- 選択ボタン用の短い表示名 ---
+   正式名は目安量の表と判定の詳細で使う。ボタンでは一目で読める長さに置き換える */
+const SHORT = {
+  vit_a:'ビタミンA', niacin:'ナイアシン', pantothenic:'パントテン酸',
+  omega3:'魚油（EPA・DHA）', mct:'MCTオイル',
+  protein_whey:'プロテイン', eaa:'EAA', arginine:'アルギニン', citrulline:'シトルリン',
+  theanine:'テアニン', tryptophan:'トリプトファン', carnitine:'カルニチン',
+  collagen:'コラーゲン', ceramide:'セラミド', placenta:'プラセンタ',
+  ginkgo:'イチョウ葉', ginseng:'高麗人参', mucuna:'ムクナ', valerian:'バレリアン',
+  curcumin:'ウコン（クルクミン）', milk_thistle:'ミルクシスル', licorice:'甘草',
+  isoflavone:'イソフラボン', garlic:'ニンニク', bilberry:'ビルベリー',
+  garcinia:'ガルシニア', yohimbe:'ヨヒンベ', capsaicin:'カプサイシン',
+  green_tea_ex:'緑茶カテキン（濃縮）', lutein:'ルテイン', caffeine:'カフェイン（錠剤）',
+  probiotics:'乳酸菌・ビフィズス菌', prebiotics:'イヌリン・オリゴ糖',
+  st_johns:'セントジョーンズワート',
+
+  f_grapefruit:'グレープフルーツ', f_seville:'ライム・ポメロ',
+  f_greenleaf:'青汁・ほうれん草', f_milk:'牛乳・乳製品', f_tea:'お茶（緑茶・紅茶）',
+  f_alcohol:'お酒', f_wholegrain:'玄米・豆類', f_rawegg:'生卵の白身',
+  f_tyramine:'熟成チーズ・赤ワイン', f_highsalt:'塩分の多い食事', f_soy:'大豆製品',
+  f_licorice_food:'漢方薬・のど飴（甘草）', f_cranberry_juice:'クランベリージュース',
+
+  d_warfarin:'ワルファリン（ワーファリン）', d_doac:'血をサラサラにする薬',
+  d_ssri:'抗うつ薬', d_statin:'コレステロールの薬', d_bp:'血圧の薬',
+  d_diabetes:'糖尿病の薬', d_thyroid:'甲状腺の薬', d_op:'ピル・ホルモン療法',
+  d_abx:'抗菌薬・抗生物質', d_sedative:'睡眠薬・抗不安薬', d_immunosuppress:'免疫抑制薬・抗がん剤',
+};
+
+/* --- 最初に大きく出す「よく選ばれるもの」ここを押すだけで大半の人が終わる --- */
+const POPULAR = [
+  {icon:'💊', label:'よく飲むサプリ', ids:[
+    'vit_c','vit_d','vit_b12','folate','vit_e','iron','zinc','magnesium','calcium',
+    'omega3','protein_whey','collagen','hyaluronic','probiotics','lutein','coq10',
+    'nmn','melatonin','curcumin','isoflavone','ginkgo','caffeine',
+  ]},
+  {icon:'🍽️', label:'よく飲む・食べるもの', ids:[
+    'f_coffee','f_tea','f_alcohol','f_natto','f_grapefruit','f_milk','f_energy','f_soy',
+  ]},
+  {icon:'🏥', label:'飲んでいるお薬', ids:[
+    'd_bp','d_op','d_statin','d_diabetes','d_warfarin','d_doac','d_ssri','d_sedative','d_abx','d_thyroid',
+  ]},
+];
+
+/* --- 上に無いものはここから。見出しを押すと中身が開く（文字入力は不要） --- */
+const PICK_GROUPS = [
+  {icon:'🟠', name:'ビタミン',            kind:'supp', cat:'ビタミン'},
+  {icon:'🔵', name:'ミネラル',            kind:'supp', cat:'ミネラル'},
+  {icon:'🐟', name:'魚油・オイル',         kind:'supp', cat:'脂質'},
+  {icon:'💪', name:'プロテイン・アミノ酸', kind:'supp', cat:'アミノ酸・タンパク'},
+  {icon:'✨', name:'美容',                kind:'supp', cat:'美容・その他'},
+  {icon:'🌿', name:'ハーブ・植物',         kind:'supp', cat:'ハーブ'},
+  {icon:'⚙️', name:'機能性成分',           kind:'supp', cat:'機能性'},
+  {icon:'🦠', name:'腸・菌',              kind:'supp', cat:'腸・その他'},
+  {icon:'🍚', name:'食品・飲料',           kind:'food', cat:null},
+  {icon:'💉', name:'お薬（系統から選ぶ）', kind:'drug', cat:null},
+];

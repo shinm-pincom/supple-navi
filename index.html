@@ -53,23 +53,30 @@
   <section class="pane on" id="pane-check">
 
     <div class="card">
-      <h2 class="card-t"><span class="step">1</span>飲んでいるもの・食べるものを選ぶ（2つ以上）</h2>
+      <h2 class="card-t"><span class="step">1</span>飲んでいるものを押す（2つ以上）</h2>
 
       <div class="sel" id="sel"></div>
 
-      <div class="srch">
-        <span class="srch-i">🔍</span>
-        <input type="text" id="q" placeholder="成分名・食品名で検索（例: 鉄、納豆、ワーファリン、グレープフルーツ）">
-      </div>
+      <!-- 押すだけで選べるパネル（よく選ばれるもの → 種類ごと）。文字入力は不要 -->
+      <div id="pick"></div>
 
-      <div class="chips" id="kinds">
-        <button class="chip on" data-kind="all">すべて</button>
-        <button class="chip" data-kind="supp">サプリ成分</button>
-        <button class="chip" data-kind="food">食品・飲料</button>
-        <button class="chip" data-kind="drug">お薬（系統）</button>
-      </div>
+      <!-- 名前で探したい人だけ開く。既定では閉じている -->
+      <button class="more-b" id="srch-t">🔤 名前を入力して探す（任意）</button>
+      <div id="srch-w" hidden>
+        <div class="srch">
+          <span class="srch-i">🔍</span>
+          <input type="text" id="q" placeholder="成分名・食品名で検索（例: 鉄、納豆、ワーファリン、グレープフルーツ）">
+        </div>
 
-      <div class="grid" id="grid"></div>
+        <div class="chips" id="kinds">
+          <button class="chip on" data-kind="all">すべて</button>
+          <button class="chip" data-kind="supp">サプリ成分</button>
+          <button class="chip" data-kind="food">食品・飲料</button>
+          <button class="chip" data-kind="drug">お薬（系統）</button>
+        </div>
+
+        <div class="grid" id="grid"></div>
+      </div>
       <p class="hint">💡 お薬は「系統」で選べます。商品名がわからない場合は薬の説明書やお薬手帳をご確認ください。</p>
     </div>
 
@@ -91,14 +98,20 @@
           <button data-sex="f">成人女性</button>
         </span>
       </h2>
-      <div class="srch">
-        <span class="srch-i">🔍</span>
-        <input type="text" id="q2" placeholder="成分名で検索">
-      </div>
       <div class="chips" id="cats2"></div>
+      <button class="more-b" id="q2-t">🔤 成分名を入力して探す（任意）</button>
+      <div id="q2-w" hidden>
+        <div class="srch">
+          <span class="srch-i">🔍</span>
+          <input type="text" id="q2" placeholder="成分名で検索">
+        </div>
+      </div>
       <div id="dose-out"></div>
     </div>
   </section>
+
+  <!-- スマホで2つ以上選んだときに下端に出る判定バー（押すと結果へ移動） -->
+  <div class="bar" id="bar"></div>
 
   <div class="disc-f">
     <strong>免責事項</strong><br>

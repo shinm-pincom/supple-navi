@@ -216,7 +216,63 @@ e0 = ng;
 });
 S.picked = []; G('renderResult')();
 
-console.log('\n=== 15. JSエラーの発生有無 ===');
+console.log('\n=== 15. 文字入力ゼロで完結できるか（押すだけの操作）===');
+e0 = ng;
+click($('.tab[data-pane="check"]'));
+S.picked = []; S.q = ''; S.openG = null;
+G('renderSel')(); G('renderPick')(); G('renderResult')();
+
+const pks = $$('#pick .pk');
+if (!pks.length) bad('「よく選ばれるもの」のボタンが描画されない');
+else ok(`押すだけの候補 ${pks.length}件を表示`);
+
+const pkIron = pks.find(b => b.dataset.id === 'iron');
+const pkMilk = pks.find(b => b.dataset.id === 'f_milk');
+if (!pkIron || !pkMilk) bad('鉄・牛乳が押すだけの候補に含まれていない');
+else {
+  click(pkIron); click(pkMilk);
+  if ($$('#sel .sel-c').length !== 2) bad('押すだけで2件選択できていない');
+  else ok('鉄・牛乳をタップで選択（入力ゼロ）');
+  if (!$('#out .vb')) bad('結論バナーが出ない');
+  else ok(`結論バナー「${$('#out .vb-t').textContent.trim()}」`);
+  if (!$('#bar.on')) bad('画面下端の判定バーが出ない');
+  else ok(`下部バー「${$('#bar .bar-m').textContent.trim()}」`);
+  if (!$('#bar-go')) bad('「結果を見る」ボタンが無い');
+  else { click($('#bar-go')); ok('「結果を見る」で例外が出ない'); }
+}
+
+const acHeads = $$('#pick .ac-h');
+if (!acHeads.length) bad('種類ごとの開閉パネルが無い');
+else {
+  click(acHeads[0]);
+  const opened = $$('#pick .ac.on .pk').length;
+  if (!opened) bad('種類パネルを押しても中身が開かない');
+  else ok(`種類パネル「${$('#pick .ac.on .ac-n').textContent}」を開いて ${opened}件`);
+  click($$('#pick .ac-h')[0]);
+  if ($$('#pick .ac.on').length) bad('同じ見出しを押しても閉じない'); else ok('同じ見出しを押すと閉じる');
+}
+
+S.picked = ['vit_c', 'vit_d', 'f_water'];
+G('renderSel')(); G('renderPick')(); G('renderResult')();
+const foldEl = $('#out .fold');
+if (!foldEl) bad('○（報告なし）の折りたたみが無い');
+else if (foldEl.hasAttribute('open')) bad('○の折りたたみが最初から開いている');
+else ok(`○ ${$$('#out .fold .rc').length}組を折りたたんで表示（読む量を減らせている）`);
+
+click($('.tab[data-pane="goal"]'));
+S.goal = null; S.goalCat = null; G('renderGoal')();
+const gpops = $$('#pane-goal .gpop');
+if (!gpops.length) bad('「よくある悩み」のボタンが無い');
+else {
+  click(gpops[0]);
+  if (!$$('#pane-goal .sup').length) bad('よくある悩みを押しても詳細が出ない');
+  else ok(`よくある悩み ${gpops.length}件・1タップで詳細（成分 ${$$('#pane-goal .sup').length}件）`);
+}
+S.goal = null; S.goalCat = null; G('renderGoal')();
+S.picked = []; click($('.tab[data-pane="check"]'));
+G('renderSel')(); G('renderPick')(); G('renderResult')();
+
+console.log('\n=== 16. JSエラーの発生有無 ===');
 if (jsErrors.length) jsErrors.forEach(e => bad('JSエラー: ' + e));
 else ok('操作中に未捕捉のJSエラーなし');
 

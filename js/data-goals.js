@@ -504,3 +504,9 @@ const GOALS = [
  lifestyle:'週2回の筋トレ（自体重スクワットでも可）が最重要。',
  avoid:'—'},
 ];
+
+/* --- 最初に大きく出す「よくある悩み」。カテゴリを掘らずに1タップで詳細へ --- */
+const POPULAR_GOALS = [
+  'g_sleep_onset', 'g_fatigue', 'g_stress', 'g_skin_dry', 'g_diet_fat', 'g_constipation',
+  'g_bp', 'g_focus', 'g_hair', 'g_anemia', 'g_joint', 'g_cold',
+];

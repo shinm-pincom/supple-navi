@@ -86,7 +86,25 @@ app.split(/\n/).forEach((line, n) => {
 const escCalls = (app.match(/esc\(/g) || []).length - 1;
 if (ng === e0) console.log(`  OK 入力値の直接埋め込みなし（esc() 適用 ${escCalls}箇所）`);
 
-console.log('\n=== 9. 免責の常時表示 ===');
+console.log('\n=== 9. 文字入力なしで完結できるか ===');
+e0 = ng;
+// 検索欄は「開かなくても使える」状態＝既定で hidden になっているか
+[['srch-w', '飲み合わせタブの検索'], ['q2-w', '目安量タブの検索']].forEach(([id, name]) => {
+  const m = html.match(new RegExp('id="' + id + '"([^>]*)>'));
+  if (!m) bad(`${name}（#${id}）が index.html に無い`);
+  else if (!/\bhidden\b/.test(m[1])) bad(`${name}が既定で開いている（hidden 属性が無い）`);
+});
+if (!/id="gq-w"[^>]*\bhidden\b/.test(app)) bad('悩みタブの検索が既定で開いている（hidden 属性が無い）');
+// 押すだけで選べるデータが揃っているか
+const dataSrc = ['data-items', 'data-goals']
+  .map(f => fs.readFileSync(path.join(D, 'js', f + '.js'), 'utf8')).join('\n');
+['POPULAR', 'PICK_GROUPS', 'SHORT', 'POPULAR_GOALS'].forEach(n => {
+  if (!new RegExp('const\\s+' + n + '\\s*=').test(dataSrc)) bad(`${n} の定義が見つからない`);
+  if (!new RegExp('\\b' + n + '\\b').test(app)) bad(`${n} を app.js が使っていない`);
+});
+if (ng === e0) console.log('  OK 検索欄は既定で閉じ、押すだけの選択肢（POPULAR / PICK_GROUPS / POPULAR_GOALS）を使用');
+
+console.log('\n=== 10. 免責の常時表示 ===');
 e0 = ng;
 if (!/必ず医師・薬剤師に最終確認/.test(html)) bad('冒頭の免責文が無い');
 if (!/責任を負いません/.test(html)) bad('フッターの免責文が無い');
